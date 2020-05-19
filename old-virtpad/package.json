@@ -5,7 +5,6 @@
   "main": "build/main.js",
   "scripts": {
     "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/') && !console.log('Use \\`npx pnpm install\\` to install dependencies in this repository\\n') && process.exit(1)\"",
-    "postinstall": "node post-install.js",
     "build": "tsc -p .",
     "watch": "tsc -w -p .",
     "start": "node build/main.js"
@@ -34,10 +33,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "typescript": "^3.9.2"
   },
-  "postinstallOptions": {
-    "linux": {
-      "uinput": "https://github.com/timstableford/node-uinput/tarball/bd4c94b3903ec23c00d6cd25513a44f3d599e4c4",
-      "bindings": "^1.5.0"
-    }
+  "dependencies": {
+    "uinput": "workspace:*"
   }
 }
