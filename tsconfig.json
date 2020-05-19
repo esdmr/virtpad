@@ -5,6 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "commonJS",
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "newLine": "lf",
     "outDir": "build",
     "pretty": true,
