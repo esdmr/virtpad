@@ -9,18 +9,11 @@ const inputEvent = bindings.input_event;
 /** @type {import('./index')['events']} */
 const events = bindings.events;
 
-/** @type {'writeUInt16LE' | 'writeUInt16BE'} */
-let writeUInt16;
-/** @type {'writeUInt32LE' | 'writeUInt32BE'} */
-let writeUInt32;
+let writeUInt16 = /** @type {'writeUInt16LE' | 'writeUInt16BE'} */
+    ('writeUInt16' + os.endianness());
 
-if (os.endianness() === 'LE') {
-    writeUInt16 = 'writeUInt16LE';
-    writeUInt32 = 'writeUInt32LE';
-} else {
-    writeUInt16 = 'writeUInt16BE';
-    writeUInt32 = 'writeUInt32BE';
-}
+let writeUInt32 = /** @type {'writeUInt32LE' | 'writeUInt32BE'} */
+    ('writeUInt32' + os.endianness());
 
 // struct input_id {
 //     __u16 bustype;
