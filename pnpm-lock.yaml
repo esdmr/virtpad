@@ -26,6 +26,15 @@ importers:
       eslint-plugin-promise: ^4.2.1
       eslint-plugin-standard: ^4.0.1
       typescript: ^3.9.2
+  uinput:
+    dependencies:
+      bindings: 1.5.0
+      ioctl: 2.0.2
+      nan: 2.14.1
+    specifiers:
+      bindings: ^1.2.1
+      ioctl: ^2.0.2
+      nan: ^2.14.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
@@ -237,6 +246,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+  /bindings/1.5.0:
+    dependencies:
+      file-uri-to-path: 1.0.0
+    dev: false
+    resolution:
+      integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
   /brace-expansion/1.1.11:
     dependencies:
       balanced-match: 1.0.0
@@ -697,6 +712,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-bCg29ictuBaKUwwArK4ouCaqDgLZcysCFLmM/Yn/FDoqndh/9vNuQfXRDvTuXKLxfD/JtZQGKFT8MGcJBK644g==
+  /file-uri-to-path/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
   /find-up/2.1.0:
     dependencies:
       locate-path: 2.0.0
@@ -858,6 +877,14 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-5fJMWEmikSYu0nv/flMc475MhGbB7TSPd/2IpFV4I4rMklboCH2rQjYY5kKiYGHqUF9gvaambupcJFFG9dvReg==
+  /ioctl/2.0.2:
+    dependencies:
+      bindings: 1.5.0
+      nan: 2.14.1
+    dev: false
+    requiresBuild: true
+    resolution:
+      integrity: sha512-GPEiU99bJb3Z50JDRujQ9t+q4JaRvc1UrD7F5/kHDVWlRA3L4TMwqbMw/XIu/BzqccFP8OfsK+JIXmlAvJDs1g==
   /is-arrayish/0.2.1:
     dev: true
     resolution:
@@ -1018,6 +1045,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
+  /nan/2.14.1:
+    dev: false
+    resolution:
+      integrity: sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
   /natural-compare/1.4.0:
     dev: true
     resolution:

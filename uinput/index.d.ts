@@ -1,33 +1,52 @@
-declare module 'uinput' {
-	import type { WriteStream } from 'fs';
 
-	export type SetupConfig = unknown;
-	export type CreateConfig = unknown;
-	export type EventType = number;
-	export type CodeType = number;
-	export type InputEvent =
-		(type: EventType, code: CodeType, value: number) => Buffer;
+import type { WriteStream } from 'fs';
 
-	export interface IAbs {
-		offset: number;
-		value: number;
-	}
+export interface SetupConfig {
+    EV_KEY: number[];
+    EV_ABS?: number[];
+    EV_REL?: number[];
+}
 
-	class UInput {
-		constructor (stream: WriteStream);
-		write (data: any): Promise<void>;
-		create (option: CreateConfig): Promise<void>;
-		sendEvent (type: EventType, code: CodeType, value: number): Promise<void>;
-		keyEvent (code: CodeType): Promise<void>;
-		emitCombo (code: CodeType[]): Promise<void>;
-	}
+export interface CreateConfig {
+    name: string;
+    ffEffectsMax?: number;
+    absMax?: IAbs[];
+    absMin?: IAbs[];
+    absFuzz?: IAbs[];
+    absFlat?: IAbs[];
 
-	export function Abs (offset: number, value: number): IAbs;
-	export function setup (options: SetupConfig): Promise<UInput>;
+    id: {
+        busType: number;
+        vendor: number;
+        product: number;
+        version: number;
+    };
+}
 
-	// #region
+export type EventType = number;
+export type CodeType = number;
+export type InputEvent =
+    (type: EventType, code: CodeType, value: number) => Buffer;
 
-	export const ABS_BRAKE: 10;
+export interface IAbs {
+    offset: number;
+    value: number;
+}
+
+declare class UInput {
+    constructor (stream: WriteStream);
+    write (data: any): Promise<void>;
+    create (option: CreateConfig): Promise<void>;
+    sendEvent (type: EventType, code: CodeType, value: number): Promise<void>;
+    keyEvent (code: CodeType): Promise<void>;
+    emitCombo (code: CodeType[]): Promise<void>;
+}
+
+export function abs (offset: number, value: number): IAbs;
+export function setup (options: SetupConfig): Promise<UInput>;
+
+export namespace events {
+    export const ABS_BRAKE: 10;
 	export const ABS_CNT: 64;
 	export const ABS_DISTANCE: 25;
 	export const ABS_GAS: 9;
@@ -723,6 +742,4 @@ declare module 'uinput' {
 	export const UI_SET_SNDBIT: 1074025834;
 	export const UI_SET_SWBIT: 1074025837;
 	export const UINPUT_MAX_NAME_SIZE: 80;
-
-	// #endregion
 }
