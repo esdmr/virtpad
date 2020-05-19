@@ -1,4 +1,3 @@
-/// <reference path="./uinput.d.ts" />
 import bindings from 'bindings';
 import uinput from 'uinput';
 
@@ -33,6 +32,6 @@ export class Input {
 
 	async flushEvent () {
 		await this.init();
-		await this.deviceCache!.write(inputEvent(uinput.EV_SYN, uinput.SYN_REPORT, 0));;
+		await this.deviceCache!.write(inputEvent(uinput.events.EV_SYN, uinput.events.SYN_REPORT, 0));;
 	}
 }
