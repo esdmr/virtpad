@@ -64,17 +64,17 @@
 
     /* Start of configuration */
     "@typescript-eslint/indent":          [ "error", "tab", {
-      "VariableDeclarator": true,
-      "outerIIFEBody": true,
-      "MemberExpression": true,
-      "FunctionDeclaration": { "parameters": true, "body": true },
-      "FunctionExpression": { "parameters": true, "body": true },
-      "CallExpression": { "arguments": true },
-      "ArrayExpression": true,
-      "ObjectExpression": true,
-      "ImportDeclaration": true,
+      "VariableDeclarator": 1,
+      "outerIIFEBody": 1,
+      "MemberExpression": 1,
+      "FunctionDeclaration": { "parameters": 1, "body": 1 },
+      "FunctionExpression": { "parameters": 1, "body": 1 },
+      "CallExpression": { "arguments": 1 },
+      "ArrayExpression": 1,
+      "ObjectExpression": 1,
+      "ImportDeclaration": 1,
       "flatTernaryExpressions": false,
-      "SwitchCase": true,
+      "SwitchCase": 1,
       "ignoreComments": false,
       "ignoredNodes": ["TemplateLiteral *"]
     } ],
