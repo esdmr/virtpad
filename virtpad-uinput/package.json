@@ -1,5 +1,5 @@
 {
-  "name": "virtpad",
+  "name": "virtpad-uinput",
   "version": "1.0.0",
   "description": "Gamepad/Joypad emulator.",
   "main": "build/main.js",

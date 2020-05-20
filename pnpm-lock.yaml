@@ -1,5 +1,14 @@
 importers:
-  old-virtpad:
+  uinput:
+    dependencies:
+      bindings: 1.5.0
+      ioctl: 2.0.2
+      nan: 2.14.1
+    specifiers:
+      bindings: ^1.2.1
+      ioctl: ^2.0.2
+      nan: ^2.14.0
+  virtpad-uinput:
     dependencies:
       uinput: 'link:../uinput'
     devDependencies:
@@ -29,15 +38,6 @@ importers:
       eslint-plugin-standard: ^4.0.1
       typescript: ^3.9.2
       uinput: 'workspace:*'
-  uinput:
-    dependencies:
-      bindings: 1.5.0
-      ioctl: 2.0.2
-      nan: 2.14.1
-    specifiers:
-      bindings: ^1.2.1
-      ioctl: ^2.0.2
-      nan: ^2.14.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
