@@ -1,4 +1,3 @@
-// This is a temporary file which will be moved to directory virtpad.
 import type { CreateConfig, SetupConfig } from '../../uinput';
 
 export interface Config {
