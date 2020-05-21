@@ -10,10 +10,10 @@ export interface SetupConfig {
 export interface CreateConfig {
     name: string;
     ffEffectsMax?: number;
-    absMax?: IAbs[];
-    absMin?: IAbs[];
-    absFuzz?: IAbs[];
-    absFlat?: IAbs[];
+    absMax?: Abs[];
+    absMin?: Abs[];
+    absFuzz?: Abs[];
+    absFlat?: Abs[];
 
     id: {
         busType: number;
@@ -28,7 +28,7 @@ export type CodeType = number;
 export type InputEvent =
     (type: EventType, code: CodeType, value: number) => Buffer;
 
-export interface IAbs {
+export interface Abs {
     offset: number;
     value: number;
 }
@@ -42,7 +42,7 @@ declare class UInput {
     emitCombo (code: CodeType[]): Promise<void>;
 }
 
-export function abs (offset: number, value: number): IAbs;
+export function abs (offset: number, value: number): Abs;
 export function setup (options: SetupConfig): Promise<UInput>;
 
 export namespace events {
