@@ -1,17 +1,12 @@
 import bindings from 'bindings';
 import uinput from 'uinput';
+import { Driver } from 'virtpad-shared';
 
 const _uin = bindings('../node_modules/uinput/build/Release/uinput.node');
 const inputEvent = _uin.input_event as uinput.InputEvent;
 
-interface UInputConfig {
-	setup: uinput.SetupConfig;
-	create: uinput.CreateConfig;
-}
-
-export class Input {
+export class Input extends Driver {
 	private uinputCache?: uinput.UInput;
-	constructor (readonly config: UInputConfig) { }
 
 	async init () {
 		if (this.uinputCache == null) {
@@ -19,6 +14,11 @@ export class Input {
 			this.uinputCache = device;
 			await device.create(this.config.create);
 		}
+	}
+
+	async getUinput () {
+		await this.init();
+		return this.uinputCache;
 	}
 
 	async sendEvent (...args: Parameters<uinput.UInput['sendEvent']>) {
