@@ -37,26 +37,20 @@ function inputId (options) {
 /**
  * @param {string} name
  */
-function deviceName (name) {
+function deviceName (name = '') {
     const buf = Buffer.alloc(events.UINPUT_MAX_NAME_SIZE);
-
-    if (name) {
-        buf.write(name, 0);
-    }
-
+    buf.write(name, 0);
     return buf;
 }
 
 /**
- * @param {import('./index').IAbs[]} abs
+ * @param {import('./index').Abs[]} absArr
  */
-function absArray (abs) {
+function absArray (absArr = []) {
     const buf = Buffer.alloc(events.ABS_CNT * 4);
 
-    if (abs) {
-        for (let i = 0; i < abs.length; i++) {
-            buf[writeUInt32](abs[i].value, abs[i].offset * 4);
-        }
+    for (const abs of absArr) {
+        buf[writeUInt32](abs.value, abs.offset * 4);
     }
 
     return buf;
@@ -65,7 +59,7 @@ function absArray (abs) {
 /**
  * @param {number} offset
  * @param {number} value
- * @returns {import('./index').IAbs}
+ * @returns {import('./index').Abs}
  */
 function abs (offset, value) {
     return {
@@ -167,6 +161,7 @@ class UInput {
         for (let i = 0; i < code.length; i++) {
             await this.sendEvent(events.EV_KEY, code[i], 1);
         }
+
         // Release them in reverse
         for (let i = code.length; i-- > 0;) {
             await this.sendEvent(events.EV_KEY, code[i], 0);
@@ -179,20 +174,22 @@ async function setup (options) {
         const stream = fs.createWriteStream('/dev/uinput');
         const uinput = new UInput(stream);
         stream.once('error', reject);
+
         stream.on('open', (fd) => {
             const eventKeys = Object.keys(options);
-            for (let i = 0; i < eventKeys.length; i++) {
-                const ev = eventKeys[i];
+
+            for (const ev of eventKeys) {
                 if (ioctl(fd, events.UI_SET_EVBIT, events[ev])) {
                     throw new Error("Could not listen for event: " + ev);
                 }
-                for (let j = 0; j < (options[ev]).length; j++) {
-                    const val = options[ev][j];
+
+                for (const val of options[ev]) {
                     if (ioctl(fd, ioctls[events[ev] - 1], val)) {
                         throw new Error("Could not setup: " + val);
                     }
                 }
             }
+
             stream.removeAllListeners('error');
             resolve(uinput);
         });
