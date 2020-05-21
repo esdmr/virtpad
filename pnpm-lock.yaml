@@ -4,7 +4,10 @@ importers:
       bindings: 1.5.0
       ioctl: 2.0.2
       nan: 2.14.1
+    devDependencies:
+      '@types/node': 14.0.4
     specifiers:
+      '@types/node': ^14.0.4
       bindings: ^1.2.1
       ioctl: ^2.0.2
       nan: ^2.14.0
@@ -107,6 +110,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-zqRj8ugfROCjXCNbmPBe2mmQ0fJWP9lQaN519hwunOgpHgVykme4G6FW95++dyNFDvJUk4rtExkVkL0eciu5NA==
+  /@types/node/14.0.4:
+    dev: true
+    resolution:
+      integrity: sha512-k3NqigXWRzQZVBDS5D1U70A5E8Qk4Kh+Ha/x4M8Bt9pF0X05eggfnC9+63Usc9Q928hRUIpIhTQaXsZwZBl4Ew==
   /@typescript-eslint/eslint-plugin/2.34.0_7736e17983494ab37bff012bcf9a2eb2:
     dependencies:
       '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0+typescript@3.9.2
