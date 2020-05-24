@@ -1,13 +1,13 @@
 {
-  "name": "virtpad-uinput",
+  "name": "virtpad",
   "version": "1.0.0",
-  "description": "Virtpad UInput module.",
+  "description": "Gamepad/Joypad emulator.",
   "main": "build/main.js",
+  "types": "build/main.d.ts",
   "scripts": {
     "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/') && !console.log('Use \\`npx pnpm install\\` to install dependencies in this repository\\n') && process.exit(1)\"",
     "build": "tsc -p .",
-    "watch": "tsc -w -p .",
-    "start": "node build/main.js"
+    "watch": "tsc -w -p ."
   },
   "author": "Saeed M Rad",
   "license": "MIT",
@@ -25,8 +25,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "typescript": "^3.9.2"
   },
-  "dependencies": {
-    "uinput": "workspace:*",
-    "virtpad-shared": "workspace:*"
+  "optionalDependencies": {
+    "virtpad-uinput": "workspace:*"
   }
 }
