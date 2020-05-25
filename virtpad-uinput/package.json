@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Virtpad UInput module.",
   "main": "build/main.js",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "url": "https://github.com/esdmr/virtpad.git",
+    "directory": "virtpad/"
+  },
   "scripts": {
     "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/') && !console.log('Use \\`npx pnpm install\\` to install dependencies in this repository\\n') && process.exit(1)\"",
     "build": "tsc -p .",
