@@ -4,6 +4,10 @@
   "description": "Virtpad shared files.",
   "main": "build/main.js",
   "types": "build/main.d.ts",
+  "repository": {
+    "url": "https://github.com/esdmr/virtpad.git",
+    "directory": "virtpad/"
+  },
   "scripts": {
     "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/') && !console.log('Use \\`npx pnpm install\\` to install dependencies in this repository\\n') && process.exit(1)\"",
     "build": "tsc -p .",
