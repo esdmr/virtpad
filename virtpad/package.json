@@ -5,7 +5,7 @@
   "main": "build/main.js",
   "types": "build/main.d.ts",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "url": "https://github.com/esdmr/virtpad.git",
