@@ -1,4 +1,5 @@
 import type { CreateConfig, SetupConfig } from '../../uinput';
+import { AsyncTask } from './task';
 
 export interface Config {
 	setup: SetupConfig;
@@ -23,9 +24,8 @@ export enum Abs {
 	HAT3X, HAT3Y,
 }
 
-export abstract class Driver {
-	constructor (protected config: Config) {}
-	abstract init (): Promise<void>;
+export abstract class Driver extends AsyncTask {
+	constructor (protected config: Config) { super(); }
 	abstract sendKey (key: Key, value: number): Promise<void>;
 	abstract sendAbs (abs: Abs, value: number): Promise<void>;
 }
