@@ -1,16 +1,10 @@
 {
+  "private": true,
   "name": "virtpad",
   "version": "1.0.0",
   "description": "Gamepad/Joypad emulator.",
   "main": "build/main.js",
   "types": "build/main.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "url": "https://github.com/esdmr/virtpad.git",
-    "directory": "virtpad/"
-  },
   "scripts": {
     "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/') && !console.log('Use \\`npx pnpm install\\` to install dependencies in this repository\\n') && process.exit(1)\"",
     "build": "tsc -p .",
