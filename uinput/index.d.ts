@@ -37,6 +37,7 @@ declare class UInput {
     constructor (stream: WriteStream);
     write (data: any): Promise<void>;
     create (option: CreateConfig): Promise<void>;
+    destroy (): Promise<void>;
     sendEvent (type: EventType, code: CodeType, value: number): Promise<void>;
     keyEvent (code: CodeType): Promise<void>;
     emitCombo (code: CodeType[]): Promise<void>;

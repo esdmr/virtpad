@@ -108,13 +108,23 @@ const ioctls = [
 ];
 
 class UInput {
-    constructor (stream) {
+    /**
+     * @param {import('fs').WriteStream} stream
+     * @param {number} fd
+     */
+    constructor (stream, fd) {
         this.stream = stream;
+        this.fd = fd;
     }
 
     async write (data) {
+        if (this.stream.writableEnded) {
+            throw new Error('Write to uinput after being destroyed.');
+        }
+
         return new Promise((resolve, reject) => {
             this.stream.once('error', reject);
+
             this.stream.write(data, (err) => {
                 this.stream.removeAllListeners('error');
                 if (err) {
@@ -135,14 +145,22 @@ class UInput {
         return new Promise((resolve, reject) => {
             this.stream.once('error', reject);
             this.stream.write(userDev, (err) => {
-                if (ioctl(this.stream.fd, events.UI_DEV_CREATE)) {
+                if (ioctl(this.fd, events.UI_DEV_CREATE)) {
                     throw new Error('Could not create uinput device');
                 }
 
-                this.stream.removeAllListeners('error');
+                this.stream.removeListener('error', reject);
                 resolve();
             });
         });
+    }
+
+    async destroy () {
+        if (ioctl(this.fd, events.UI_DEV_DESTROY)) {
+            throw new Error('Could not create uinput device');
+        }
+
+        this.stream.end();
     }
 
     async sendEvent (type, code, value) {
@@ -172,7 +190,6 @@ class UInput {
 async function setup (options) {
     return new Promise((resolve, reject) => {
         const stream = fs.createWriteStream('/dev/uinput');
-        const uinput = new UInput(stream);
         stream.once('error', reject);
 
         stream.on('open', (fd) => {
@@ -191,7 +208,7 @@ async function setup (options) {
             }
 
             stream.removeAllListeners('error');
-            resolve(uinput);
+            resolve(new UInput(stream, fd));
         });
     });
 }
