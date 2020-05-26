@@ -9,11 +9,7 @@ export abstract class Task {
 }
 
 export abstract class AsyncTask<ReadyType = void> {
-	#readyState: Promise<ReadyType>;
-
-	constructor () {
-		this.#readyState = this.ready();
-	}
+	#readyState = this.ready();
 
 	protected get readyState () {
 		return this.#readyState;
