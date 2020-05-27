@@ -9,10 +9,10 @@ export abstract class Task {
 }
 
 export abstract class AsyncTask<ReadyType = void> {
-	#readyState = this.ready();
+	private taskReadyState = this.ready();
 
 	protected get readyState () {
-		return this.#readyState;
+		return this.taskReadyState;
 	}
 
 	abstract ready (): Promise<ReadyType>;
