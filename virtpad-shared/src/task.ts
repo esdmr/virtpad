@@ -2,7 +2,7 @@ type PromiseLike<T> = T | Promise<T>;
 
 export abstract class Task {
 	protected get readyState () {
-		return true;
+		return;
 	}
 
 	abstract stop (): void;
