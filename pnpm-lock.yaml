@@ -26,6 +26,7 @@ importers:
       eslint-plugin-standard: 4.0.1_eslint@6.8.0
       typescript: 3.9.2
     optionalDependencies:
+      virtpad-shared: 'link:../virtpad-shared'
       virtpad-uinput: 'link:../virtpad-uinput'
     specifiers:
       '@types/bindings': ^1.3.0
@@ -40,6 +41,7 @@ importers:
       eslint-plugin-promise: ^4.2.1
       eslint-plugin-standard: ^4.0.1
       typescript: ^3.9.2
+      virtpad-shared: 'workspace:^1.0.0'
       virtpad-uinput: 'workspace:*'
   virtpad-shared:
     devDependencies:

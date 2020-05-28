@@ -27,6 +27,7 @@
     "typescript": "^3.9.2"
   },
   "optionalDependencies": {
+    "virtpad-shared": "workspace:*",
     "virtpad-uinput": "workspace:*"
   }
 }

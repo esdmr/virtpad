@@ -2,7 +2,7 @@ import uinput from 'uinput';
 import { Abs, Driver, Key } from 'virtpad-shared';
 import { absMap, keyMap } from './map';
 
-export class Input extends Driver {
+export default class Input extends Driver {
 	private uinputCache?: uinput.UInput;
 
 	async ready () {
