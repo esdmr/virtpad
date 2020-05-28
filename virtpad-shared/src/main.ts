@@ -29,3 +29,5 @@ export abstract class Driver extends AsyncTask {
 	abstract sendKey (key: Key, value: number): Promise<void>;
 	abstract sendAbs (abs: Abs, value: number): Promise<void>;
 }
+
+export * from './task';
