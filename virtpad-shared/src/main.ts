@@ -1,9 +1,34 @@
-import type { CreateConfig, SetupConfig } from '../../uinput';
 import { AsyncTask } from './task';
 
+export enum XInputCompat {
+	// Every feature can be made in xinput.
+	// Example: XBox controllers.
+	COMPLETE,
+
+	// Some keys/abs' are placed in the wrong position.
+	// Example: Most of Nintendo controllers. (A-B, X-Y)
+	PARTIAL,
+
+	// Some features are not supported.
+	// Example: Dualshock 4 touch pad.
+	INCOMPLETE,
+
+	// Major features are not supported.
+	// Example: NES SuperScope.
+	IMPOSSIBLE,
+}
+
 export interface Config {
-	setup: SetupConfig;
-	create: CreateConfig;
+	name: string;
+	xinputCompatible: XInputCompat;
+	keys: Key[];
+	abs: {[x in Abs]?: [number, number]};
+
+	id: {
+		vendor: number;
+		product: number;
+		version: number;
+	};
 }
 
 export enum Key {
@@ -24,10 +49,14 @@ export enum Abs {
 	HAT3X, HAT3Y,
 }
 
-export abstract class Driver extends AsyncTask {
-	constructor (protected config: Config) { super(); }
+export abstract class Driver extends AsyncTask<(config: Config) => void> {
+	constructor (protected config: Config) { super(config); }
 	abstract sendKey (key: Key, value: number): Promise<void>;
 	abstract sendAbs (abs: Abs, value: number): Promise<void>;
 }
 
+export const I32_MIN = -0x80000000;
+export const I32_MAX = +0x7FFFFFFF;
+
+export type GamepadConfigBuilder = (config?: any) => Config;
 export * from './task';

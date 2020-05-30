@@ -8,13 +8,17 @@ export abstract class Task {
 	abstract stop (): void;
 }
 
-export abstract class AsyncTask<ReadyType = void> {
-	private taskReadyState = this.ready();
+export abstract class AsyncTask<ReadyFunc extends (...arg: any[]) => any = () => void> {
+	private taskReadyState: Promise<ReturnType<ReadyFunc>>;
+
+	constructor (...args: Parameters<ReadyFunc>) {
+		this.taskReadyState = this.ready(...args);
+	}
 
 	protected get readyState () {
 		return this.taskReadyState;
 	}
 
-	abstract ready (): Promise<ReadyType>;
+	abstract ready (...args: Parameters<ReadyFunc>): Promise<ReturnType<ReadyFunc>>;
 	abstract stop (): PromiseLike<void>;
 }
