@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd virtpad-shared
+pnpm run build
+cd ../virtpad-uinput
+pnpm run build
+cd ../virtpad
+pnpm run build
