@@ -12,8 +12,8 @@ const events = bindings.events;
 let writeUInt16 = /** @type {'writeUInt16LE' | 'writeUInt16BE'} */
     ('writeUInt16' + os.endianness());
 
-let writeUInt32 = /** @type {'writeUInt32LE' | 'writeUInt32BE'} */
-    ('writeUInt32' + os.endianness());
+let writeInt32 = /** @type {'writeInt32LE' | 'writeInt32BE'} */
+    ('writeInt32' + os.endianness());
 
 // struct input_id {
 //     __u16 bustype;
@@ -50,7 +50,7 @@ function absArray (absArr = []) {
     const buf = Buffer.alloc(events.ABS_CNT * 4);
 
     for (const abs of absArr) {
-        buf[writeUInt32](abs.value, abs.offset * 4);
+        buf[writeInt32](abs.value, abs.offset * 4);
     }
 
     return buf;
@@ -76,7 +76,7 @@ function uinputUserDev (options) {
     const id = inputId(options.id);
 
     const ffEffectsMax = Buffer.alloc(4);
-    ffEffectsMax[writeUInt32](options.ffEffectsMax || 0, 0);
+    ffEffectsMax[writeInt32](options.ffEffectsMax || 0, 0);
 
     const absMax = absArray(options.absMax);
     const absMin = absArray(options.absMin);
