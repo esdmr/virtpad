@@ -1,4 +1,4 @@
-import { AsyncTask } from './task';
+import { Task } from './task';
 
 export enum XInputCompat {
 	// Every feature can be made in xinput.
@@ -49,7 +49,7 @@ export enum Abs {
 	HAT3X, HAT3Y,
 }
 
-export abstract class Driver extends AsyncTask<(config: Config) => void> {
+export abstract class Driver extends Task<(config: Config) => Promise<void>> {
 	constructor (protected config: Config) { super(config); }
 	abstract sendKey (key: Key, value: number): Promise<void>;
 	abstract sendAbs (abs: Abs, value: number): Promise<void>;

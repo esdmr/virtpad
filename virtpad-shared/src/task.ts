@@ -1,24 +1,25 @@
 type PromiseLike<T> = T | Promise<T>;
+type FuncLike = (...arg: any[]) => any;
+type P<T extends FuncLike> = Parameters<T>;
+type R<T extends FuncLike> = ReturnType<T>;
 
-export abstract class Task {
-	protected get readyState () {
-		return;
-	}
+export abstract class Task<RF extends FuncLike = () => void> {
+	private readonly taskParameters: P<RF>;
+	private taskReadyState?: R<RF>;
 
-	abstract stop (): void;
-}
-
-export abstract class AsyncTask<ReadyFunc extends (...arg: any[]) => any = () => void> {
-	private taskReadyState: Promise<ReturnType<ReadyFunc>>;
-
-	constructor (...args: Parameters<ReadyFunc>) {
-		this.taskReadyState = this.ready(...args);
+	constructor (...args: P<RF>) {
+		this.taskParameters = args;
 	}
 
 	protected get readyState () {
-		return this.taskReadyState;
+		if (this.taskReadyState == null) this.start();
+		return this.taskReadyState as R<RF>;
 	}
 
-	abstract ready (...args: Parameters<ReadyFunc>): Promise<ReturnType<ReadyFunc>>;
+	start () {
+		this.taskReadyState = this.ready(...this.taskParameters);
+	}
+
 	abstract stop (): PromiseLike<void>;
+	protected abstract ready(...args: P<RF>): R<RF>;
 }
