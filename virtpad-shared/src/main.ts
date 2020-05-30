@@ -55,6 +55,9 @@ export abstract class Driver extends Task<(config: Config) => Promise<void>> {
 	abstract sendAbs (abs: Abs, value: number): Promise<void>;
 }
 
+type DriverClass = typeof Driver;
+export interface GenericDriverClass extends DriverClass {}
+
 export const I32_MIN = -0x80000000;
 export const I32_MAX = +0x7FFFFFFF;
 
