@@ -1,0 +1,3 @@
+[submodule "uinput"]
+	path = uinput
+	url = https://github.com/esdmr/node-uinput
