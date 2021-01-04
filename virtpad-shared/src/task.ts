@@ -16,8 +16,9 @@ export abstract class Task<RF extends FuncLike = () => void> {
 		return this.taskReadyState as R<RF>;
 	}
 
-	start () {
+	async start () {
 		this.taskReadyState = this.ready(...this.taskParameters);
+		await (this.taskReadyState! as PromiseLike<R<RF>>);
 	}
 
 	abstract stop (): PromiseLike<void>;

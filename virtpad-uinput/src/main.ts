@@ -7,7 +7,6 @@ export default class Input extends Driver {
 
 	async ready (config: Config) {
 		this.config = config;
-		console.log(config);
 
 		if (this.uinputCache == null) {
 			const device = await uinput.setup(this.setupConfig);
